@@ -1,10 +1,9 @@
 #include <WebServer.h>
- #include <WiFi.h>
- 
+#include <WiFi.h>
+
  String ssid = "WiFiLED";
  String password = "";
  WebServer server(80); 
-
  
  void setup() {
    // put your setup code here, to run once:
