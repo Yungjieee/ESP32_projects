@@ -116,7 +116,7 @@ void loop() {
     }
   }
 
-  // Get relay control value from Firebase (expecting 0 or 1)
+  // Get led control value from Firebase (expecting 0 or 1)
   if (Firebase.RTDB.getInt(&fbdo, "/103/led/status")) {
     int ledStatus = fbdo.intData();
     Serial.print("LED command from Firebase: ");
@@ -132,7 +132,7 @@ void loop() {
       }
 
       previousLedStatus = ledStatus;
-      Firebase.RTDB.setInt(&fbdo, "/103/led/status", ledStatus);
+      // Firebase.RTDB.setInt(&fbdo, "/103/led/status", ledStatus);  //application will set the status, arduino will not set the status
     } else {
       Serial.println("LED status unchanged, no action taken.");
     }
