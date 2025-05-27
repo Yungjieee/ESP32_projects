@@ -1,16 +1,19 @@
 #include <WiFi.h>
-#include <dht.h>
+#include "DHT.h"
 #include <HTTPClient.h>
 #include <WiFiClient.h>
 
-const char* ssid = "myUUM_Guest";
+const char* ssid = "Alicia";
 const char* pass = "";
-int hum = 0, temp = 0;
+float hum = 0, temp = 0;
 unsigned long sendDataPrevMillis = 0;
 int count = 0;
-String serverName = "";
+String serverName = "http://iottraining.threelittlecar.com/";
 
-dht DHT;
+// DHT sensor setup
+#define DHTPIN 4
+#define DHTTYPE DHT11
+DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
   // put your setup code here, to run once:
@@ -56,12 +59,27 @@ void loop() {
 
 
 void getDHT() {
-  int chk = DHT.read11(19);
-  Serial.print("Temperature=");
-  Serial.println(DHT.temperature);
-  hum = DHT.humidity;
-  temp = DHT.temperature;
-  Serial.print("Humidity=");
-  Serial.println(DHT.humidity);
-  delay(200);
+  // int chk = DHT.read11(19);
+  // Serial.print("Temperature=");
+  // Serial.println(DHT.temperature);
+  // hum = DHT.humidity;
+  // temp = DHT.temperature;
+  // Serial.print("Humidity=");
+  // Serial.println(DHT.humidity);
+  // delay(200);
+  
+    delay(2000);
+    temp = dht.readTemperature();
+    hum = dht.readHumidity();
+
+    if (!isnan(temp) && !isnan(hum)) {
+      Serial.printf("Temp: %.2f°C | Humidity: %.2f%% ", temp, hum);
+
+    } else {
+      Serial.println("DHT sensor read failed.");
+      
+    }
+
+    delay(200);
+
 }
