@@ -3,6 +3,7 @@
 #include <HTTPClient.h>
 #include <WiFiClient.h>
 
+
 const char* ssid = "Alicia";
 const char* pass = "";
 float hum = 0, temp = 0;
@@ -59,14 +60,6 @@ void loop() {
 
 
 void getDHT() {
-  // int chk = DHT.read11(19);
-  // Serial.print("Temperature=");
-  // Serial.println(DHT.temperature);
-  // hum = DHT.humidity;
-  // temp = DHT.temperature;
-  // Serial.print("Humidity=");
-  // Serial.println(DHT.humidity);
-  // delay(200);
   
     delay(2000);
     temp = dht.readTemperature();
